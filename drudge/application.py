@@ -21,7 +21,7 @@ loop = asyncio.get_event_loop()
 app = web.Application(middlewares=(), loop=loop, debug=settings.DEBUG)
 
 app.update(
-    pool=loop.run_until_complete(create_pool(settings.DATABASE_URI,
+    pool=loop.run_until_complete(create_pool(settings.DATABASE_URL,
                                              minsize=settings.DATABASE_POOL_MIN,
                                              maxsize=settings.DATABASE_POOL_MAX,
                                              cursor_factory=DictCursor)),

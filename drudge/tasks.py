@@ -13,7 +13,7 @@ logger = logging.getLogger('drudge:tasks')
 
 
 app = Celery('drudge:tasks',
-             broker=os.environ.get('BROKER_URI', 'redis://localhost:6379/0'))
+             broker=os.environ.get('REDIS_URL', 'redis://localhost:6379/0'))
 app.conf.update(
     CELERY_TASK_SERIALIZER='json',
     CELERY_ACCEPT_CONTENT=['json'],
@@ -25,7 +25,7 @@ app.conf.update(
         'scrape-every-120-seconds': {
             'task': 'drudge.tasks.scrape',
             'schedule': timedelta(seconds=os.environ.get('SCRAPE_TIME_SECONDS', 120)),
-            'args': (os.environ['DATABASE_URI'],),
+            'args': (os.environ['DATABASE_URL'],),
         },
     },
 )

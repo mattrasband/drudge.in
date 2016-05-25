@@ -5,7 +5,7 @@ services:
         build:
             context: .
         environment:
-            - DATABASE_URI=postgres://postgres:@postgres:5432/postgres
+            - DATABASE_URL=postgres://postgres:@postgres:5432/postgres
         ports:
             - 8080:8080
         links:
@@ -17,8 +17,8 @@ services:
         build:
             context: .
         environment:
-            - DATABASE_URI=postgres://postgres:@postgres:5432/postgres
-            - BROKER_URI=redis://redis:6379/0
+            - DATABASE_URL=postgres://postgres:@postgres:5432/postgres
+            - REDIS_URL=redis://redis:6379/0
         links:
             - redis:redis
             - postgres:postgres
