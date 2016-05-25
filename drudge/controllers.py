@@ -3,6 +3,8 @@ import logging
 from aiohttp import web
 import arrow
 
+from drudge.util import json_response
+
 logger = logging.getLogger('drudge.io')
 
 
@@ -16,10 +18,13 @@ async def latest_articles(request):
         ORDER BY updated_at DESC, location DESC'''
         query_args = []
 
+        # Easy way to check for both new and updated articles,
+        # it's up to the client to figure out which it is
+        # from their perspective.
         if request.GET.get('since'):
             try:
                 since = arrow.get(request.GET.get('since'))
-                query += ' WHERE created_at > %s'
+                query += ' WHERE updated_at > %s'
                 query_args.append(since.datetime)
             except:
                 raise web.HTTPBadREquest(text='Invalid date format')
@@ -28,9 +33,7 @@ async def latest_articles(request):
         articles = []
         async for row in cur:
             articles.append(dict(row))
-            articles[-1]['created_at'] = str(articles[-1]['created_at'])
-            articles[-1]['updated_at'] = str(articles[-1]['updated_at'])
-        return web.json_response(articles)
+        return json_response(articles)
 
 
 def setup(app):
