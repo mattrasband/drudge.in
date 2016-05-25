@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+    web:
+        build:
+            context: .
+        environment:
+            - DATABASE_URI=postgres://postgres:@postgres:5432/postgres
+        ports:
+            - 8080:8080
+        links:
+            - postgres:postgres
+        volumes:
+            - .:/app
+        command: gunicorn drudge.application:app --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker --reload
+    worker:
+        build:
+            context: .
+        environment:
+            - DATABASE_URI=postgres://postgres:@postgres:5432/postgres
+            - BROKER_URI=redis://redis:6379/0
+        links:
+            - redis:redis
+            - postgres:postgres
+        command: celery -A drudge.tasks:app worker --autoreload -B -l INFO
+    postgres:
+        image: postgres:latest
+        ports:
+            - 5432:5432
+        volumes:
+            - pg_data:/var/lib/postgres/data
+    redis:
+        image: redis:latest
+        volumes:
+            - redis_data:/var/lib/redis
+
+volumes:
+    pg_data:
+        driver: local
+    redis_data:
+        driver: local

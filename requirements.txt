@@ -1,0 +1,23 @@
+aiohttp==0.21.6
+aiopg==0.9.2
+amqp==1.4.9
+anyjson==0.3.3
+arrow==0.7.0
+beautifulsoup4==4.4.1
+billiard==3.3.0.23
+cchardet==1.0.0
+celery==3.1.23
+chardet==2.3.0
+-e git://github.com/mrasband/drudge_parser.git@b2783e3dbfdca4112548e6222d710be7dc249700#egg=drudge_parser
+gunicorn==19.6.0
+html5lib==0.9999999
+iniherit==0.3.4
+kombu==3.0.35
+psycopg2==2.6.1
+python-dateutil==2.5.3
+python-slugify==1.2.0
+pytz==2016.4
+redis==2.10.5
+six==1.10.0
+Unidecode==0.4.19
+yoyo-migrations==5.0.1
