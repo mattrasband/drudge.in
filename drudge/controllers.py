@@ -14,8 +14,7 @@ async def latest_articles(request):
         SELECT
             id, title, href, location, image_url, created_at, updated_at
         FROM
-            public.articles
-        ORDER BY updated_at DESC, location DESC'''
+            public.articles'''
         query_args = []
 
         # Easy way to check for both new and updated articles,
@@ -27,7 +26,9 @@ async def latest_articles(request):
                 query += ' WHERE updated_at > %s'
                 query_args.append(since.datetime)
             except:
-                raise web.HTTPBadREquest(text='Invalid date format')
+                raise web.HTTPBadRequest(text='Invalid date format')
+
+        query += ' ORDER BY updated_at DESC, location DESC'
 
         await cur.execute(query, query_args)
         articles = []
