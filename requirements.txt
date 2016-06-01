@@ -9,11 +9,15 @@ cchardet==1.0.0
 celery==3.1.23
 chardet==2.3.0
 -e git://github.com/mrasband/drudge_parser.git@b2783e3dbfdca4112548e6222d710be7dc249700#egg=drudge_parser
+flake8==2.5.4
 gunicorn==19.6.0
 html5lib==0.9999999
 iniherit==0.3.4
 kombu==3.0.35
+mccabe==0.4.0
+pep8==1.7.0
 psycopg2==2.6.1
+pyflakes==1.0.0
 python-dateutil==2.5.3
 python-slugify==1.2.0
 pytz==2016.4

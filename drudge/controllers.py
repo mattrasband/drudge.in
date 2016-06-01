@@ -39,4 +39,3 @@ async def latest_articles(request):
 
 def setup(app):
     app.router.add_route('GET', '/api/v1/articles/latest', latest_articles)
-

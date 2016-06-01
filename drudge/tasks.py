@@ -46,8 +46,7 @@ def scrape(dsn):
                     hrefs.append(article.href)
 
                     cur.execute('''SELECT title, href, location, image_url
-                    FROM public.articles WHERE href = %s''',
-                    [article.href])
+                    FROM public.articles WHERE href = %s''', [article.href])
 
                     res = cur.fetchone()
                     if not res:
@@ -95,4 +94,3 @@ def scrape(dsn):
                 raise e
             else:
                 logger.info('Scrape finished successfully.')
-
