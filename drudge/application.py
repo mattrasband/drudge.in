@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import os
 
 from aiohttp import web
 from aiopg import create_pool

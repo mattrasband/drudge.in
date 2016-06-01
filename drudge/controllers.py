@@ -28,7 +28,7 @@ async def latest_articles(request):
             except:
                 raise web.HTTPBadRequest(text='Invalid date format')
 
-        query += ' ORDER BY updated_at DESC, location DESC'
+        query += ' ORDER BY location ASC, updated_at DESC'
 
         await cur.execute(query, query_args)
         articles = []
