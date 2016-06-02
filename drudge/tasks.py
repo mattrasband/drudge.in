@@ -24,7 +24,7 @@ app.conf.update(
     CELERYBEAT_SCHEDULE={
         'scrape-every-120-seconds': {
             'task': 'drudge.tasks.scrape',
-            'schedule': timedelta(seconds=os.environ.get('SCRAPE_TIME_SECONDS', 120)),
+            'schedule': timedelta(seconds=int(os.environ.get('SCRAPE_TIME_SECONDS', 120))),
             'args': (os.environ['DATABASE_URL'],),
         },
     },
